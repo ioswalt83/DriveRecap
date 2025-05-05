@@ -910,7 +910,7 @@
     errorMsg.className = 'form-subtext';
 
     try {
-        const res = await fetch('/api/lead', {
+        const res = await fetch('https://dev.21handshake.com/webhook/lead-capture', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
