@@ -1,34 +1,32 @@
 export default async function handler(req, res) {
-  if (req.method === 'POST') {
-    const { name, email, company, salesReps, crm } = req.body;
+  if (req.method !== 'POST') {
+    res.setHeader('Allow', ['POST']);
+    return res.status(405).end(`Method ${req.method} Not Allowed`);
+  }
 
-    try {
-      const webhookRes = await fetch("https://services.leadconnectorhq.com/hooks/8Q12QNIJ4qhBpVA4mD89/webhook-trigger/a439da60-3a43-4897-ae1d-589b2d0d4f8c", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          company,
-          salesReps,
-          crm,
-          source: "Driver Recap Pricing Page",
-        }),
-      });
+  const { name, email, company, salesReps, crm } = req.body;
 
-      if (!webhookRes.ok) {
-        throw new Error(`GHL webhook failed: ${webhookRes.statusText}`);
-      }
+  try {
+    const webhookRes = await fetch("https://services.leadconnectorhq.com/hooks/8Q12QNIJ4qhBpVA4mD89/webhook-trigger/a439da60-3a43-4897-ae1d-589b2d0d4f8c", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name,
+        email,
+        company,
+        salesReps,
+        crm,
+        source: "Driver Recap Pricing Page"
+      }),
+    });
 
-      return res.status(200).json({ success: true });
-    } catch (err) {
-      console.error("Webhook Error:", err);
-      return res.status(500).json({ error: "Webhook submission failed" });
+    if (!webhookRes.ok) {
+      throw new Error(`GHL webhook failed: ${webhookRes.statusText}`);
     }
-  } else {
-    res.setHeader("Allow", ["POST"]);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
+
+    return res.status(200).json({ success: true });
+  } catch (err) {
+    console.error("GHL Error:", err);
+    return res.status(500).json({ error: "Submission failed" });
   }
 }
