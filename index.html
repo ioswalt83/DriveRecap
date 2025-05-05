@@ -885,7 +885,7 @@
         </div>
     </footer>
 
-   <script>
+  <script>
   document.querySelector('.lead-form').addEventListener('submit', async function(e) {
     e.preventDefault();
 
@@ -894,6 +894,10 @@
     const company = document.getElementById('company').value;
     const salesReps = document.getElementById('sales_reps').value;
     const crm = document.getElementById('crm').value;
+
+    // Remove any previous messages
+    const existingMessages = this.querySelectorAll('.form-subtext');
+    existingMessages.forEach(msg => msg.remove());
 
     const submitBtn = this.querySelector('button');
     const originalBtnText = submitBtn.innerText;
@@ -914,10 +918,9 @@
         body: JSON.stringify({
           name,
           email,
-          phone: '', // Optional — update if you add phone input
-          dotNumber: company,
-          fleetSize: salesReps,
-          referralSource: crm
+          company,
+          salesReps,
+          crm
         })
       });
 
@@ -936,6 +939,7 @@
     }
   });
 </script>
+
 
 </body>
 </html>
