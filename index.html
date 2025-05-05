@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DriveRecap - Voice CRM Automation for B2B Sales Teams</title>
+    <link rel="icon" type="image/png" href="driverecap_favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3CDE7D; /* Bright green accent */
+            --dark-gray: #333333;
+            --medium-gray: #666666;
+            --light-gray: #f5f5f5;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background-color: var(--white);
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+            width: 100%;
+            max-width: 100vw;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            background-color: white;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            height: 150px; /* Increased by another 50% from 100px */
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 60px; /* Adjusted for larger logo */
+            background-color: var(--white);
+            width: 100%;
+        }
+
+        .hero-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .hero-content {
+            flex: 1;
+            min-width: 300px;
+            max-width: 550px;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 300px;
+            max-width: 500px;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .subheadline {
+            font-size: 1.5rem;
+            color: var(--medium-gray);
+            margin-bottom: 30px;
+        }
+
+        .quote-box {
+            background-color: var(--light-gray);
+            padding: 15px 20px;
+            border-left: 4px solid var(--primary);
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        /* Form Styles */
+        .lead-form {
+            background-color: var(--light-gray);
+            padding: 30px;
+            border-radius: 8px;
+            width: 100%;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #32b569;
+        }
+
+        .form-subtext {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: var(--medium-gray);
+        }
+
+        .important-note {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: 80px 0;
+            background-color: var(--light-gray);
+            width: 100%;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .workflow {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 50px;
+        }
+
+        .workflow-step {
+            flex: 1;
+            padding: 0 15px;
+            text-align: center;
+        }
+
+        .step-number {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            font-weight: 600;
+        }
+
+        .step-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .step-description {
+            color: var(--medium-gray);
+        }
+
+        .workflow-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--medium-gray);
+            font-size: 1.5rem;
+        }
+
+        .data-flow-image {
+            display: block;
+            margin: 40px auto;
+            max-width: 100%;
+        }
+
+        .insights {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .insights-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .insights-list {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .insight-item {
+            flex-basis: 30%;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .insight-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 80px 0;
+            width: 100%;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-gap: 25px;
+        }
+
+        .benefit-item {
+            padding: 25px;
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .benefit-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 0;
+            background-color: var(--light-gray);
+            width: 100%;
+        }
+
+        .pricing-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 40px;
+            max-width: 700px;
+            margin: 0 auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .pricing-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .pricing-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-gray);
+        }
+
+        .pricing-period {
+            color: var(--medium-gray);
+            font-size: 1rem;
+        }
+
+        .pricing-setup {
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .pricing-features {
+            margin: 30px 0;
+        }
+
+        .pricing-feature {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .pricing-feature-icon {
+            color: var(--primary);
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .pricing-additional {
+            background-color: var(--light-gray);
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+        }
+
+        /* Story Section */
+        .story {
+            padding: 80px 0;
+            width: 100%;
+        }
+
+        .story-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .story-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 80px 0;
+            background-color: var(--dark-gray);
+            color: white;
+            text-align: center;
+            width: 100%;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-phone {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .cta-subtext {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: #ccc;
+        }
+
+        /* Footer */
+        footer {
+            padding: 50px 0;
+            background-color: var(--dark-gray);
+            color: white;
+            width: 100%;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .footer-logo {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo img {
+            height: 120px; /* Increased by 50% from 80px */
+            margin-bottom: 15px;
+        }
+
+        .footer-links {
+            flex: 2;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .footer-column {
+            min-width: 150px;
+            margin-bottom: 20px;
+        }
+
+        .footer-column h4 {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .logo {
+                height: 100px;
+            }
+            
+            .subheadline {
+                font-size: 1.3rem;
+            }
+            
+            .workflow {
+                flex-direction: column;
+            }
+            
+            .workflow-step {
+                margin-bottom: 30px;
+            }
+            
+            .workflow-arrow {
+                transform: rotate(90deg);
+                margin: 10px 0;
+            }
+            
+            .insight-item {
+                flex-basis: 45%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 0;
+            }
+            
+            .logo {
+                height: 80px;
+            }
+            
+            nav {
+                display: none; /* Mobile menu would go here */
+            }
+            
+            .hero {
+                padding: 120px 0 50px;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .insight-item {
+                flex-basis: 100%;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+            }
+            
+            .footer-logo img {
+                height: 80px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <img src="driverecap_logo_final.png" alt="DriveRecap Logo" class="logo">
+            <nav>
+                <ul>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#benefits">Benefits</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#story">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h1>Sales reps should be in front of customers, not in front of CRMs.</h1>
+                <p class="subheadline">Log your sales calls in 3 minutes—just talk. AI handles the rest.</p>
+                
+                <div class="quote-box">
+                    "I hate filling out CRMs" - every sales rep
+                </div>
+                
+                <form class="lead-form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" placeholder="Your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="Your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company Name</label>
+                        <input type="text" id="company" placeholder="Your company name">
+                    </div>
+                    <div class="form-group">
+                        <label for="sales_reps">Number of Sales Reps</label>
+                        <select id="sales_reps">
+                            <option value="">Select number of sales reps</option>
+                            <option value="1-5">1-5 sales reps</option>
+                            <option value="6-10">6-10 sales reps</option>
+                            <option value="11-25">11-25 sales reps</option>
+                            <option value="26-50">26-50 sales reps</option>
+                            <option value="51+">51+ sales reps</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="crm">CRM Used (Optional)</label>
+                        <select id="crm">
+                            <option value="">Select your CRM (optional)</option>
+                            <option value="salesforce">Salesforce</option>
+                            <option value="hubspot">HubSpot</option>
+                            <option value="pipedrive">Pipedrive</option>
+                            <option value="zoho">Zoho CRM</option>
+                            <option value="highLevel">HighLevel</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn">Try the Live Demo</button>
+                    <p class="form-subtext">Call <span class="important-note">1-616-920-8209</span> after signing up to try DriveRecap. <strong>Important: Dial the "1" before the number.</strong> We'll email you a full summary afterward.</p>
+                </form>
+            </div>
+            <div class="hero-image">
+                <img src="sales_rep_car_younger.png" alt="Sales representative using DriveRecap in car">
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            
+            <div class="workflow">
+                <div class="workflow-step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Exit Meeting</h3>
+                    <p class="step-description">Sales rep finishes customer meeting and has fresh details in mind.</p>
+                </div>
+                
+                <div class="workflow-arrow">→</div>
+                
+                <div class="workflow-step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Call DriveRecap</h3>
+                    <p class="step-description">Rep calls the dedicated number and responds to AI prompts for ~3 minutes.</p>
+                </div>
+                
+                <div class="workflow-arrow">→</div>
+                
+                <div class="workflow-step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">AI Processing</h3>
+                    <p class="step-description">System generates audio file, transcription, and detailed summary with action items.</p>
+                </div>
+                
+                <div class="workflow-arrow">→</div>
+                
+                <div class="workflow-step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Automatic Distribution</h3>
+                    <p class="step-description">Report sent to your CRM and included in weekly sales manager reports.</p>
+                </div>
+            </div>
+            
+            <img src="data_flow_updated.png" alt="DriveRecap Data Flow" class="data-flow-image" width="800">
+            
+            <div class="insights">
+                <h3 class="insights-title">Why Voice Logging Works Better</h3>
+                <div class="insights-list">
+                    <div class="insight-item">
+                        <div class="insight-value">7x</div>
+                        <p>Humans speak faster than they type</p>
+                    </div>
+                    <div class="insight-item">
+                        <div class="insight-value">50%</div>
+                        <p>Details forgotten within 24 hours</p>
+                    </div>
+                    <div class="insight-item">
+                        <div class="insight-value">90%</div>
+                        <p>More information captured vs. next-day updates</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits" id="benefits">
+        <div class="container">
+            <h2 class="section-title">Key Benefits</h2>
+            
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-microphone" style="color: var(--primary);"></i></div>
+                    <h3 class="benefit-title">3-Minute Voice-to-Report</h3>
+                    <p>Log detailed call notes in the time it takes to grab a coffee.</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-chart-line" style="color: var(--primary);"></i></div>
+                    <h3 class="benefit-title">Weekly Manager Reports</h3>
+                    <p>Automated summaries keep leadership informed of all field activity.</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-plug" style="color: var(--primary);"></i></div>
+                    <h3 class="benefit-title">CRM Integration</h3>
+                    <p>Works with most popular CRMs—no technical setup required.</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-sliders-h" style="color: var(--primary);"></i></div>
+                    <h3 class="benefit-title">Custom Prompts</h3>
+                    <p>Tailored questions ensure you capture exactly what matters to your business.</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-file-alt" style="color: var(--primary);"></i></div>
+                    <h3 class="benefit-title">Custom Report Layout</h3>
+                    <p>Format data exactly how your team needs to see it.</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-phone-alt" style="color: var(--primary);"></i></div>
+                    <h3 class="benefit-title">Dedicated Phone Line</h3>
+                    <p>Each account gets its own dedicated number for simplified calling.</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-rocket" style="color: var(--primary);"></i></div>
+                    <h3 class="benefit-title">HighLevel Setup Option</h3>
+                    <p>No CRM? We can set you up with HighLevel for complete management.</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-download" style="color: var(--primary);"></i></div>
+                    <h3 class="benefit-title">No Apps Required</h3>
+                    <p>Just call a number—no new software to install or learn.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2 class="section-title">Simple, Transparent Pricing</h2>
+            
+            <div class="pricing-card">
+                <div class="pricing-header">
+                    <h3 class="pricing-title">DriveRecap Sales Solution</h3>
+                </div>
+                
+                <div class="pricing-setup">
+                    $5,900 one-time setup fee
+                </div>
+                
+                <div class="pricing-price">
+                    $99 <span class="pricing-period">per month / per sales rep</span>
+                </div>
+                
+                <div class="pricing-features">
+                    <div class="pricing-feature">
+                        <span class="pricing-feature-icon">✓</span>
+                        <span>300 minutes/month per rep</span>
+                    </div>
+                    <div class="pricing-feature">
+                        <span class="pricing-feature-icon">✓</span>
+                        <span>Custom AI prompts & call report</span>
+                    </div>
+                    <div class="pricing-feature">
+                        <span class="pricing-feature-icon">✓</span>
+                        <span>Dedicated phone line</span>
+                    </div>
+                    <div class="pricing-feature">
+                        <span class="pricing-feature-icon">✓</span>
+                        <span>Weekly manager reports</span>
+                    </div>
+                    <div class="pricing-feature">
+                        <span class="pricing-feature-icon">✓</span>
+                        <span>CRM integration</span>
+                    </div>
+                </div>
+                
+                <div class="pricing-additional">
+                    <p><strong>Additional minutes:</strong> $0.30 per minute</p>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="#" class="btn">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story" id="story">
+        <div class="container">
+            <h2 class="section-title">Built By Someone Who's Been There</h2>
+            
+            <div class="story-content">
+                <p class="story-text">
+                    "After 20 years in B2B sales and riding along with hundreds of reps, I saw the same pattern. Great salespeople don't want to log data. Managers are left guessing. DriveRecap solves both problems—fast, accurate, automated field intelligence that respects your reps' time."
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Try the AI Sales Rep Demo Now</h2>
+            <div class="cta-phone">1-616-920-8209</div>
+            <p class="cta-subtext"><strong>Important: Dial the "1" before the number.</strong> We'll email you the AI-generated report after the call.</p>
+            
+            <div style="margin-top: 30px;">
+                <a href="#" class="btn">Sign Up for Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-logo">
+                <img src="driverecap_logo_final.png" alt="DriveRecap Logo">
+                <p>Voice-based CRM automation for B2B sales teams.</p>
+            </div>
+            
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#benefits">Benefits</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#">Demo</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#story">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:info@driverecap.com">info@driverecap.com</a></li>
+                        <li><a href="tel:16169208209">1-616-920-8209</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            © 2025 DriveRecap. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Form submission handling
+        document.querySelector('.lead-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Here you would typically send the form data to your server
+            // For demo purposes, show alert
+            alert('Thanks for signing up! Call 1-616-920-8209 to try the demo. Remember to dial the "1" before the number.');
+        });
+    </script>
+</body>
+</html>
