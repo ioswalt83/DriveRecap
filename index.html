@@ -885,15 +885,57 @@
         </div>
     </footer>
 
-    <script>
-        // Form submission handling
-        document.querySelector('.lead-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Here you would typically send the form data to your server
-            // For demo purposes, show alert
-            alert('Thanks for signing up! Call 1-616-920-8209 to try the demo. Remember to dial the "1" before the number.');
-        });
-    </script>
+   <script>
+  document.querySelector('.lead-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const company = document.getElementById('company').value;
+    const salesReps = document.getElementById('sales_reps').value;
+    const crm = document.getElementById('crm').value;
+
+    const submitBtn = this.querySelector('button');
+    const originalBtnText = submitBtn.innerText;
+    submitBtn.disabled = true;
+    submitBtn.innerText = 'Sending...';
+
+    const successMsg = document.createElement('p');
+    const errorMsg = document.createElement('p');
+    successMsg.className = 'form-subtext';
+    errorMsg.className = 'form-subtext';
+
+    try {
+      const res = await fetch('/api/lead', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          phone: '', // Optional — update if you add phone input
+          dotNumber: company,
+          fleetSize: salesReps,
+          referralSource: crm
+        })
+      });
+
+      if (!res.ok) throw new Error('Submission failed');
+
+      successMsg.innerText = '✅ Thanks! We’ll be in touch shortly.';
+      this.appendChild(successMsg);
+      this.reset();
+    } catch (err) {
+      console.error(err);
+      errorMsg.innerText = '❌ Something went wrong. Please try again or call us directly.';
+      this.appendChild(errorMsg);
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerText = originalBtnText;
+    }
+  });
+</script>
+
 </body>
 </html>
