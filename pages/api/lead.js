@@ -8,15 +8,18 @@ export default async function handler(req, res) {
 
   try {
     const webhookRes = await fetch("https://services.leadconnectorhq.com/hooks/8Q12QNIJ4qhBpVA4mD89/webhook-trigger/a439da60-3a43-4897-ae1d-589b2d0d4f8c", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({
         name,
         email,
-        company,
-        salesReps,
-        crm,
-        source: "Driver Recap Pricing Page"
+        phone: '', // Optional — fill if you add a phone field
+        dotNumber: company,
+        fleetSize: salesReps,
+        referralSource: crm,
+        source: "Driver Recap Pricing Page",
       }),
     });
 
@@ -26,7 +29,7 @@ export default async function handler(req, res) {
 
     return res.status(200).json({ success: true });
   } catch (err) {
-    console.error("GHL Error:", err);
-    return res.status(500).json({ error: "Submission failed" });
+    console.error('Webhook Error:', err);
+    return res.status(500).json({ error: 'Webhook submission failed' });
   }
 }
