@@ -15,7 +15,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         name,
         email,
-        phone: '', // Optional — fill if you add a phone field
+        phone: '', // You can replace this if you add a phone field
         dotNumber: company,
         fleetSize: salesReps,
         referralSource: crm,
