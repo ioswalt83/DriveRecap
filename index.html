@@ -618,6 +618,43 @@
             gap: 20px;
         }
         
+        .highlight-benefit {
+            border: 2px solid var(--primary);
+            background-color: rgba(60, 222, 125, 0.1);
+        }
+        
+        .highlight-feature {
+            background-color: rgba(60, 222, 125, 0.1);
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        
+        .highlight-feature .pricing-feature-icon {
+            color: var(--primary);
+        .no-crm-note {
+            background-color: rgba(60, 222, 125, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 1rem;
+            text-align: center;
+        }
+        
+        .no-crm-note i {
+            color: var(--primary);
+            margin-right: 8px;
+        }
+        }
+        .optional-tag {
+            background-color: #f1f1f1;
+            color: var(--medium-gray);
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            font-weight: normal;
+        }
         .cta-option {
             background-color: rgba(255,255,255,0.1);
             padding: 30px;
@@ -632,6 +669,13 @@
         .cta-option p {
             margin-top: 15px;
             color: #ddd;
+        }
+.pricing-note {
+            font-size: 0.85rem;
+            color: var(--medium-gray);
+            margin-top: 15px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
         }
         
         .cta-option-divider {
@@ -942,10 +986,16 @@
                     <p>Automated summaries keep leadership informed of all field activity.</p>
                 </div>
                 
+                <div class="benefit-item highlight-benefit">
+                    <div class="benefit-icon"><i class="fas fa-check-circle" style="color: var(--primary);"></i></div>
+                    <h3 class="benefit-title">No CRM Required</h3>
+                    <p>DriveRecap works without any CRM! We can route your data to email, Google Sheets, or other simple tools you already use.</p>
+                </div>
+                
                 <div class="benefit-item">
                     <div class="benefit-icon"><i class="fas fa-plug" style="color: var(--primary);"></i></div>
-                    <h3 class="benefit-title">CRM Integration</h3>
-                    <p>Works with most popular CRMs—no technical setup required.</p>
+                    <h3 class="benefit-title">Optional CRM Integration</h3>
+                    <p>If you have a CRM, we can integrate with most popular systems—no technical setup required.</p>
                 </div>
                 
                 <div class="benefit-item">
@@ -968,14 +1018,14 @@
                 
                 <div class="benefit-item">
                     <div class="benefit-icon"><i class="fas fa-rocket" style="color: var(--primary);"></i></div>
-                    <h3 class="benefit-title">HighLevel Setup Option</h3>
-                    <p>No CRM? We can set you up with HighLevel for complete management.</p>
+                    <h3 class="benefit-title">Optional HighLevel CRM</h3>
+                    <p>Want a CRM? We can set you up with HighLevel for complete management for just $97/month (completely optional).</p>
                 </div>
                 
                 <div class="benefit-item">
                     <div class="benefit-icon"><i class="fas fa-download" style="color: var(--primary);"></i></div>
-                    <h3 class="benefit-title">No Apps Required</h3>
-                    <p>Just call a number—no new software to install or learn.</p>
+                    <h3 class="benefit-title">Works With Tools You Already Use</h3>
+                    <p>Route your data to email, Google Sheets, or your existing workflow—no new software to install or learn.</p>
                 </div>
             </div>
         </div>
@@ -992,7 +1042,11 @@
                 </div>
                 
                 <div class="pricing-setup">
-                    $5,900 one-time setup fee
+                    $6,500 one-time setup fee<sup>*</sup>
+                </div>
+                
+                <div class="no-crm-note">
+                    <i class="fas fa-info-circle"></i> DriveRecap works <strong>with or without a CRM</strong>. We can route your data to email, Google Sheets, or any other tool you prefer.
                 </div>
                 
                 <div class="pricing-price">
@@ -1002,7 +1056,7 @@
                 <div class="pricing-features">
                     <div class="pricing-feature">
                         <span class="pricing-feature-icon">✓</span>
-                        <span>300 minutes/month per rep</span>
+                        <span>250 minutes/month per rep</span>
                     </div>
                     <div class="pricing-feature">
                         <span class="pricing-feature-icon">✓</span>
@@ -1016,14 +1070,20 @@
                         <span class="pricing-feature-icon">✓</span>
                         <span>Weekly manager reports</span>
                     </div>
+                    <div class="pricing-feature highlight-feature">
+                        <span class="pricing-feature-icon"><i class="fas fa-check-circle"></i></span>
+                        <span><strong>No CRM required</strong> - we can route to email/Google Sheets</span>
+                    </div>
                     <div class="pricing-feature">
                         <span class="pricing-feature-icon">✓</span>
-                        <span>CRM integration</span>
+                        <span>Optional CRM integration if you have one</span>
                     </div>
                 </div>
                 
                 <div class="pricing-additional">
                     <p><strong>Additional minutes:</strong> $0.30 per minute</p>
+                    <p><strong>HighLevel CRM:</strong> $97/month <span class="optional-tag">(optional)</span> if you want a full CRM system</p>
+                    <p class="pricing-note"><sup>*</sup>More complicated CRM integrations/reporting subject to additional investment.</p>
                 </div>
                 
                 <div style="text-align: center; margin-top: 30px;">
