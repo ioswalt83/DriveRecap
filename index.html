@@ -886,59 +886,41 @@
     </footer>
 
   <script>
-  document.querySelector('.lead-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
+    document.querySelector('.lead-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
 
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const company = document.getElementById('company').value;
-    const salesReps = document.getElementById('sales_reps').value;
-    const crm = document.getElementById('crm').value;
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const company = document.getElementById('company').value;
+        const salesReps = document.getElementById('sales_reps').value;
+        const crm = document.getElementById('crm').value;
 
-    // Remove any previous messages
-    const existingMessages = this.querySelectorAll('.form-subtext');
-    existingMessages.forEach(msg => msg.remove());
+        const payload = {
+            name,
+            email,
+            company,
+            salesReps,
+            crm
+        };
 
-    const submitBtn = this.querySelector('button');
-    const originalBtnText = submitBtn.innerText;
-    submitBtn.disabled = true;
-    submitBtn.innerText = 'Sending...';
+        try {
+            const res = await fetch('https://your-n8n-webhook-url-here', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
 
-    const successMsg = document.createElement('p');
-    const errorMsg = document.createElement('p');
-    successMsg.className = 'form-subtext';
-    errorMsg.className = 'form-subtext';
-
-    try {
-        const res = await fetch('https://dev.21handshake.com/webhook/lead-capture', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          company,
-          salesReps,
-          crm
-        })
-      });
-
-      if (!res.ok) throw new Error('Submission failed');
-
-      successMsg.innerText = '✅ Thanks! We’ll be in touch shortly.';
-      this.appendChild(successMsg);
-      this.reset();
-    } catch (err) {
-      console.error(err);
-      errorMsg.innerText = '❌ Something went wrong. Please try again or call us directly.';
-      this.appendChild(errorMsg);
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.innerText = originalBtnText;
-    }
-  });
+            if (res.ok) {
+                alert('Thanks for signing up! Call 1-616-920-8209 to try the demo.');
+            } else {
+                alert('Something went wrong. Please try again.');
+            }
+        } catch (err) {
+            alert('Error sending data. Please check your connection.');
+        }
+    });
 </script>
+
 
 
 </body>
