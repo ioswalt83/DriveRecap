@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DriveRecap - Voice CRM Automation for B2B Sales Teams</title>
+    <link rel="icon" type="image/png" href="driverecap_favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3CDE7D; /* Bright green accent */
+            --dark-gray: #333333;
+            --medium-gray: #666666;
+            --light-gray: #f5f5f5;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background-color: var(--white);
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+            width: 100%;
+            max-width: 100vw;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            background-color: white;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            height: 150px; /* Increased by another 50% from 100px */
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 60px; /* Adjusted for larger logo */
+            background-color: var(--white);
+            width: 100%;
+        }
+
+        .hero-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .hero-content {
+            flex: 1;
+            min-width: 300px;
+            max-width: 550px;
+        }
+
+        .hero-image-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-width: 300px;
+            max-width: 500px;
+            gap: 15px;
+        }
+        
+        .image-wrapper {
+            position: relative;
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .problem {
+            border: 2px solid #e74c3c;
+        }
+        
+        .solution {
+            border: 2px solid var(--primary);
+        }
+        
+        .problem-image, .solution-image {
+            width: 100%;
+            display: block;
+        }
+        
+        .image-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 8px 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .problem .image-label {
+            background: rgba(231, 76, 60, 0.8);
+        }
+        
+        .solution .image-label {
+            background: rgba(60, 222, 125, 0.8);
+        }
+        
+        .vs-divider {
+            background: var(--dark-gray);
+            color: white;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: bold;
+            margin: -5px 0;
+            z-index: 1;
+            box-shadow: 0 0 0 5px white;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .subheadline {
+            font-size: 1.5rem;
+            color: var(--medium-gray);
+            margin-bottom: 30px;
+        }
+
+        .quote-box {
+            background-color: var(--light-gray);
+            padding: 15px 20px;
+            border-left: 4px solid var(--primary);
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        /* Form Styles */
+        .lead-form-container {
+            background-color: var(--light-gray);
+            padding: 30px;
+            border-radius: 8px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .typeform-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary);
+            color: white;
+            padding: 25px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            margin: 20px auto;
+            max-width: 400px;
+        }
+
+        .typeform-btn:hover {
+            background-color: #32b569;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(60, 222, 125, 0.3);
+        }
+
+        .btn-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .btn-text {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        .btn-subtext {
+            font-size: 0.9rem;
+            font-weight: normal;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #32b569;
+        }
+
+        .demo-divider {
+            position: relative;
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .demo-divider:before, .demo-divider:after {
+            content: "";
+            display: inline-block;
+            width: 40%;
+            height: 1px;
+            background: #ddd;
+            vertical-align: middle;
+        }
+        
+        .demo-divider span {
+            display: inline-block;
+            padding: 0 15px;
+            font-weight: bold;
+            color: var(--medium-gray);
+        }
+        
+        .call-demo-box {
+            background-color: white;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+            margin-top: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        
+        .demo-title {
+            color: var(--dark-gray);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        
+        .demo-title i {
+            color: var(--primary);
+            margin-right: 8px;
+        }
+        
+        .demo-phone {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: var(--light-gray);
+            border-radius: 6px;
+            display: inline-block;
+        }
+        
+        .demo-instructions {
+            margin-bottom: 10px;
+            color: var(--dark-gray);
+        }
+        
+        .demo-action {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: 80px 0;
+            background-color: var(--light-gray);
+            width: 100%;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .workflow {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 50px;
+        }
+
+        .workflow-step {
+            flex: 1;
+            padding: 0 15px;
+            text-align: center;
+        }
+
+        .step-number {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            font-weight: 600;
+        }
+
+        .step-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .step-description {
+            color: var(--medium-gray);
+        }
+
+        .workflow-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--medium-gray);
+            font-size: 1.5rem;
+        }
+
+        .data-flow-image {
+            display: block;
+            margin: 40px auto;
+            max-width: 100%;
+        }
+
+        .insights {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .insights-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .insights-list {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .insight-item {
+            flex-basis: 30%;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .insight-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 80px 0;
+            width: 100%;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-gap: 25px;
+        }
+
+        .benefit-item {
+            padding: 25px;
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .benefit-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 0;
+            background-color: var(--light-gray);
+            width: 100%;
+        }
+
+        .pricing-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 40px;
+            max-width: 700px;
+            margin: 0 auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .pricing-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .pricing-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-gray);
+        }
+
+        .pricing-period {
+            color: var(--medium-gray);
+            font-size: 1rem;
+        }
+
+        .pricing-setup {
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .pricing-features {
+            margin: 30px 0;
+        }
+
+        .pricing-feature {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .pricing-feature-icon {
+            color: var(--primary);
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .pricing-additional {
+            background-color: var(--light-gray);
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+        }
+
+        /* Story Section */
+        .story {
+            padding: 80px 0;
+            width: 100%;
+        }
+
+        .story-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .story-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .founder-box {
+            display: flex;
+            flex-wrap: wrap;
+            background-color: var(--light-gray);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .founder-quote {
+            flex: 2;
+            padding: 40px;
+            min-width: 300px;
+        }
+        
+        .founder-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--primary);
+        }
+        
+        .founder-cta {
+            flex: 1;
+            min-width: 250px;
+            background-color: var(--dark-gray);
+            color: white;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .founder-btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--dark-gray);
+            padding: 15px 25px;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .founder-btn:hover {
+            background-color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255,255,255,0.2);
+        }
+        
+        .founder-btn i {
+            margin-right: 8px;
+        }
+        
+        .founder-subtext {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 80px 0;
+            background-color: var(--dark-gray);
+            color: white;
+            text-align: center;
+            width: 100%;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-options {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+            gap: 20px;
+        }
+        
+        .highlight-benefit {
+            border: 2px solid var(--primary);
+            background-color: rgba(60, 222, 125, 0.1);
+        }
+        
+        .highlight-feature {
+            background-color: rgba(60, 222, 125, 0.1);
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        
+        .highlight-feature .pricing-feature-icon {
+            color: var(--primary);
+        .no-crm-note {
+            background-color: rgba(60, 222, 125, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 1rem;
+            text-align: center;
+        }
+        
+        .no-crm-note i {
+            color: var(--primary);
+            margin-right: 8px;
+        }
+        }
+        .optional-tag {
+            background-color: #f1f1f1;
+            color: var(--medium-gray);
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            font-weight: normal;
+        }
+        .cta-option {
+            background-color: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 8px;
+            flex: 1;
+            min-width: 250px;
+            max-width: 400px;
+            text-align: center;
+            margin: 10px;
+        }
+        
+        .cta-option p {
+            margin-top: 15px;
+            color: #ddd;
+        }
+.pricing-note {
+            font-size: 0.85rem;
+            color: var(--medium-gray);
+            margin-top: 15px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+        
+        .cta-option-divider {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #ddd;
+            margin: 0 10px;
+        }
+        
+        .cta-phone {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 50px 0;
+            background-color: var(--dark-gray);
+            color: white;
+            width: 100%;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .footer-logo {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo img {
+            height: 120px; /* Increased by 50% from 80px */
+            margin-bottom: 15px;
+        }
+
+        .footer-links {
+            flex: 2;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .footer-column {
+            min-width: 150px;
+            margin-bottom: 20px;
+        }
+
+        .footer-column h4 {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .logo {
+                height: 100px;
+            }
+            
+            .subheadline {
+                font-size: 1.3rem;
+            }
+            
+            .workflow {
+                flex-direction: column;
+            }
+            
+            .workflow-step {
+                margin-bottom: 30px;
+            }
+            
+            .workflow-arrow {
+                transform: rotate(90deg);
+                margin: 10px 0;
+            }
+            
+            .insight-item {
+                flex-basis: 45%;
+            }
+            
+            .hero-container {
+                flex-direction: column;
+            }
+            
+            .hero-content, .hero-image-container {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 0;
+            }
+            
+            .logo {
+                height: 80px;
+            }
+            
+            nav {
+                display: none; /* Mobile menu would go here */
+            }
+            
+            .hero {
+                padding: 120px 0 50px;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .insight-item {
+                flex-basis: 100%;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+            }
+            
+            @media (max-width: 768px) {
+                .founder-quote, .founder-cta {
+                    padding: 30px 20px;
+                }
+                
+                .footer-links {
+                    flex-direction: column;
+                }
+                
+                .footer-logo img {
+                    height: 80px;
+                }
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <img src="driverecap_logo_final.png" alt="DriveRecap Logo" class="logo">
+            <nav>
+                <ul>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#benefits">Benefits</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#story">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h1>Sales reps should be in front of customers, not in front of CRMs.</h1>
+                <p class="subheadline">Log your sales calls in 3 minutes—just talk. AI handles the rest.</p>
+                
+                <div class="quote-box">
+                    "I hate filling out CRMs" - every sales rep
+                </div>
+                
+                <div class="lead-form-container">
+                    <a href="https://form.typeform.com/to/R9PqJJqs" target="_blank" class="typeform-btn">
+                        <span class="btn-icon"><i class="fas fa-rocket"></i></span>
+                        <span class="btn-text">Boost Your Sales Team's Efficiency</span>
+                        <span class="btn-subtext">Just 3 quick questions to get started</span>
+                    </a>
+                    
+                    <div class="demo-divider">
+                        <span>OR</span>
+                    </div>
+                    
+                    <div class="call-demo-box">
+                        <h3 class="demo-title"><i class="fas fa-phone-alt"></i> Experience It Now!</h3>
+                        <div class="demo-phone">1-616-920-8209</div>
+                        <p class="demo-instructions">Call now to try DriveRecap live and see the magic happen! <strong>Remember to dial "1" first.</strong></p>
+                        <p class="demo-action">We'll email your AI-generated report right after your call!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image-container">
+                <div class="image-wrapper problem">
+                    <img src="frustrated_sales_rep.png" alt="Frustrated sales rep logging data into CRM" class="problem-image">
+                    <div class="image-label">BEFORE: CRM Data Entry Frustration</div>
+                </div>
+                <div class="vs-divider">VS</div>
+                <div class="image-wrapper solution">
+                    <img src="sales_rep_car_younger.png" alt="Sales representative using DriveRecap in car" class="solution-image">
+                    <div class="image-label">AFTER: Easy Voice Logging with DriveRecap</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            
+            <div class="workflow">
+                <div class="workflow-step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Exit Meeting</h3>
+                    <p class="step-description">Sales rep finishes customer meeting and has fresh details in mind.</p>
+                </div>
+                
+                <div class="workflow-arrow">→</div>
+                
+                <div class="workflow-step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Call DriveRecap</h3>
+                    <p class="step-description">Rep calls the dedicated number and responds to AI prompts for ~3 minutes.</p>
+                </div>
+                
+                <div class="workflow-arrow">→</div>
+                
+                <div class="workflow-step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">AI Processing</h3>
+                    <p class="step-description">System generates audio file, transcription, and detailed summary with action items.</p>
+                </div>
+                
+                <div class="workflow-arrow">→</div>
+                
+                <div class="workflow-step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Automatic Distribution</h3>
+                    <p class="step-description">Report sent to your CRM and included in weekly sales manager reports.</p>
+                </div>
+            </div>
+            
+            <img src="data_flow_updated.png" alt="DriveRecap Data Flow" class="data-flow-image" width="800">
+            
+            <div class="insights">
+                <h3 class="insights-title">Why Voice Logging Works Better</h3>
+                <div class="insights-list">
+                    <div class="insight-item">
+                        <div class="insight-value">7x</div>
+                        <p>Humans speak faster than they type</p>
+                    </div>
+                    <div class="insight-item">
+                        <div class="insight-value">50%</div>
+                        <p>Details forgotten within 24 hours</p>
+                    </div>
+                    <div class="insight-item">
+                        <div class="insight-value">90%</div>
+                        <p>More information captured vs. next-day updates</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits" id="benefits">
+        <div class="container">
+            <h2 class="section-title">Key Benefits</h2>
+            
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-microphone" style="color: var(--primary);"></i></div>
+                    <h3 class="benefit-title">3-Minute Voice-to-Report</h3>
+                    <p>Log detailed call notes in the time it takes to grab a coffee.</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-chart-line" style="color: var(--primary);"></i></div>
+                    <h3 class="benefit-title">Weekly Manager Reports</h3>
+                    <p>Automated summaries keep leadership informed of all field activity.</p>
+                </div>
+                
+                <div class="benefit-item highlight-benefit">
+                    <div class="benefit-icon"><i class="fas fa-check-circle" style="color: var(--primary);"></i></div>
+                    <h3 class="benefit-title">No CRM Required</h3>
+                    <p>DriveRecap works without any CRM! We can route your data to email, Google Sheets, or other simple tools you already use.</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-plug" style="color: var(--primary);"></i></div>
+                    <h3 class="benefit-title">Optional CRM Integration</h3>
+                    <p>If you have a CRM, we can integrate with most popular systems—no technical setup required.</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-sliders-h" style="color: var(--primary);"></i></div>
+                    <h3 class="benefit-title">Custom Prompts</h3>
+                    <p>Tailored questions ensure you capture exactly what matters to your business.</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-file-alt" style="color: var(--primary);"></i></div>
+                    <h3 class="benefit-title">Custom Report Layout</h3>
+                    <p>Format data exactly how your team needs to see it.</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-phone-alt" style="color: var(--primary);"></i></div>
+                    <h3 class="benefit-title">Dedicated Phone Line</h3>
+                    <p>Each account gets its own dedicated number for simplified calling.</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-rocket" style="color: var(--primary);"></i></div>
+                    <h3 class="benefit-title">Optional HighLevel CRM</h3>
+                    <p>Want a CRM? We can set you up with HighLevel for complete management for just $97/month (completely optional).</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-download" style="color: var(--primary);"></i></div>
+                    <h3 class="benefit-title">Works With Tools You Already Use</h3>
+                    <p>Route your data to email, Google Sheets, or your existing workflow—no new software to install or learn.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2 class="section-title">Simple, Transparent Pricing</h2>
+            
+            <div class="pricing-card">
+                <div class="pricing-header">
+                    <h3 class="pricing-title">DriveRecap Sales Solution</h3>
+                </div>
+                
+                <div class="pricing-setup">
+                    $6,500 one-time setup fee<sup>*</sup>
+                </div>
+                
+                <div class="no-crm-note">
+                    <i class="fas fa-info-circle"></i> DriveRecap works <strong>with or without a CRM</strong>. We can route your data to email, Google Sheets, or any other tool you prefer.
+                </div>
+                
+                <div class="pricing-price">
+                    $99 <span class="pricing-period">per month / per sales rep</span>
+                </div>
+                
+                <div class="pricing-features">
+                    <div class="pricing-feature">
+                        <span class="pricing-feature-icon">✓</span>
+                        <span>250 minutes/month per rep</span>
+                    </div>
+                    <div class="pricing-feature">
+                        <span class="pricing-feature-icon">✓</span>
+                        <span>Custom AI prompts & call report</span>
+                    </div>
+                    <div class="pricing-feature">
+                        <span class="pricing-feature-icon">✓</span>
+                        <span>Dedicated phone line</span>
+                    </div>
+                    <div class="pricing-feature">
+                        <span class="pricing-feature-icon">✓</span>
+                        <span>Weekly manager reports</span>
+                    </div>
+                    <div class="pricing-feature highlight-feature">
+                        <span class="pricing-feature-icon"><i class="fas fa-check-circle"></i></span>
+                        <span><strong>No CRM required</strong> - we can route to email/Google Sheets</span>
+                    </div>
+                    <div class="pricing-feature">
+                        <span class="pricing-feature-icon">✓</span>
+                        <span>Optional CRM integration if you have one</span>
+                    </div>
+                </div>
+                
+                <div class="pricing-additional">
+                    <p><strong>Additional minutes:</strong> $0.30 per minute</p>
+                    <p><strong>HighLevel CRM:</strong> $97/month <span class="optional-tag">(optional)</span> if you want a full CRM system</p>
+                    <p class="pricing-note"><sup>*</sup>More complicated CRM integrations/reporting subject to additional investment.</p>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="#" class="btn">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story" id="story">
+        <div class="container">
+            <h2 class="section-title">Built By Someone Who's Been There</h2>
+            
+            <div class="story-content">
+                <div class="founder-box">
+                    <div class="founder-quote">
+                        <p class="story-text">
+                            "After 20 years in B2B sales and riding along with hundreds of reps, I saw the same pattern. Great salespeople don't want to log data. Managers are left guessing. DriveRecap solves both problems—fast, accurate, automated field intelligence that respects your reps' time."
+                        </p>
+                        <div class="founder-name">— Isaac Oswalt, Founder</div>
+                    </div>
+                    <div class="founder-cta">
+                        <a href="https://api.leadconnectorhq.com/widget/bookings/chat-w/-isaac" target="_blank" class="founder-btn">
+                            <i class="fas fa-calendar-check"></i> Book a Call with Isaac
+                        </a>
+                        <p class="founder-subtext">Have questions? Chat directly with the founder</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Try DriveRecap Two Ways</h2>
+            <div class="cta-options">
+                <div class="cta-option">
+                    <div class="cta-phone">1-616-920-8209</div>
+                    <p><strong>Call now</strong> to experience the demo directly. <br>Remember to dial "1" first!</p>
+                </div>
+                <div class="cta-option-divider">OR</div>
+                <div class="cta-option">
+                    <a href="https://form.typeform.com/to/R9PqJJqs" target="_blank" class="btn">Answer 3 Quick Questions</a>
+                    <p>We'll contact you to set up your demo</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-logo">
+                <img src="driverecap_logo_final.png" alt="DriveRecap Logo">
+                <p>Voice-based CRM automation for B2B sales teams.</p>
+            </div>
+            
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#benefits">Benefits</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#">Demo</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#story">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:info@driverecap.com">info@driverecap.com</a></li>
+                        <li><a href="tel:16169208209">1-616-920-8209</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            © 2025 DriveRecap. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // No form handling needed as we're using Typeform
+    </script>
+</body>
+</html>
