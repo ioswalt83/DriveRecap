@@ -904,11 +904,17 @@
         };
 
         try {
-            const res = await fetch('https://your-n8n-webhook-url-here', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
+            const res = await fetch('https://dev.21handshake.com/webhook-test/drive-recap-lead', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+        name: 'Test Name',
+        email: 'test@example.com',
+        company: 'Test Company',
+        salesReps: '3',
+        crm: 'HubSpot'
+    })
+});
 
             if (res.ok) {
                 alert('Thanks for signing up! Call 1-616-920-8209 to try the demo.');
